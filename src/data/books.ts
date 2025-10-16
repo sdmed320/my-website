@@ -1,0 +1,88 @@
+
+import { Book } from '../models';
+
+export const books: Book[] = [
+    {
+      id: 1,
+      title: "ألف ليلة وليلة",
+      author: "مؤلف غير معروف",
+      description: "مجموعة قصصية شهيرة من التراث العربي تحكيها شهرزاد للملك شهريار.",
+      originalPrice: 400,
+      currentPrice: 350,
+      isAvailable: true,
+      coverImage: "https://picsum.photos/seed/book1/300/450",
+      category: "أدب كلاسيكي"
+    },
+    {
+      id: 2,
+      title: "كليلة ودمنة",
+      author: "ابن المقفع",
+      description: "مجموعة من الحكايات الأخلاقية على ألسنة الحيوانات.",
+      currentPrice: 280,
+      isAvailable: false,
+      coverImage: "https://picsum.photos/seed/book2/300/450",
+      category: "أدب كلاسيكي"
+    },
+    {
+      id: 3,
+      title: "مقدمة ابن خلدون",
+      author: "ابن خلدون",
+      description: "مقدمة موسوعية في علم الاجتماع والتاريخ.",
+      currentPrice: 450,
+      isAvailable: true,
+      coverImage: "https://picsum.photos/seed/book3/300/450",
+      category: "تاريخ وفلسفة"
+    },
+    {
+      id: 4,
+      title: "ديوان المتنبي",
+      author: "أبو الطيب المتنبي",
+      description: "أشهر دواوين الشعر العربي، يضم قصائد في الفخر والحكمة والمدح.",
+      originalPrice: 350,
+      currentPrice: 320,
+      isAvailable: true,
+      coverImage: "https://picsum.photos/seed/book4/300/450",
+      category: "شعر"
+    },
+    {
+      id: 5,
+      title: "رسالة الغفران",
+      author: "أبو العلاء المعري",
+      description: "رحلة خيالية في العالم الآخر، تعد من روائع النثر العربي.",
+      currentPrice: 300,
+      isAvailable: true,
+      coverImage: "https://picsum.photos/seed/book5/300/450",
+      category: "أدب كلاسيكي"
+    },
+    {
+      id: 6,
+      title: "البخلاء",
+      author: "الجاحظ",
+      description: "كتاب أدبي ساخر يصور نوادر البخلاء وقصصهم.",
+      currentPrice: 250,
+      isAvailable: false,
+      coverImage: "https://picsum.photos/seed/book6/300/450",
+      category: "أدب ساخر"
+    },
+    {
+        id: 7,
+        title: "لا تحزن",
+        author: "عائض القرني",
+        description: "كتاب في التنمية البشرية يدعو إلى التفاؤل ونبذ اليأس.",
+        originalPrice: 250,
+        currentPrice: 200,
+        isAvailable: true,
+        coverImage: "https://picsum.photos/seed/book7/300/450",
+        category: "تنمية بشرية"
+    },
+    {
+        id: 8,
+        title: "رجال في الشمس",
+        author: "غسان كنفاني",
+        description: "رواية تصور معاناة اللاجئين الفلسطينيين.",
+        currentPrice: 220,
+        isAvailable: true,
+        coverImage: "https://picsum.photos/seed/book8/300/450",
+        category: "روايات"
+    }
+];

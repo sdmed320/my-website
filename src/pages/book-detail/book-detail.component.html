@@ -1,0 +1,55 @@
+<div class="container mx-auto p-4 md:p-8">
+  @if (book(); as b) {
+    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Book Cover -->
+        <div class="md:col-span-1 flex justify-center">
+          <img [src]="b.coverImage" [alt]="b.title" class="w-full max-w-xs md:max-w-full h-auto object-contain rounded-md shadow-md">
+        </div>
+
+        <!-- Book Info -->
+        <div class="md:col-span-2">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{{ b.title }}</h1>
+          <p class="text-lg text-gray-500 mb-6">تأليف: {{ b.author }}</p>
+
+          <div class="flex items-baseline gap-4 mb-6">
+            @if (b.originalPrice && b.originalPrice > b.currentPrice) {
+              <p class="text-red-500 text-5xl font-bold">{{ b.currentPrice }}</p>
+              <p class="text-gray-400 text-3xl font-medium line-through">{{ b.originalPrice }}</p>
+            } @else {
+              <p class="text-red-500 text-5xl font-bold">{{ b.currentPrice }}</p>
+            }
+            <span class="text-gray-600 text-2xl font-medium">أوقية جديدة</span>
+          </div>
+
+          @if(b.isAvailable) {
+            <button (click)="addToCart(b)" class="w-full max-w-xs text-center px-8 py-4 rounded-lg text-white font-semibold text-lg main-btn hover:opacity-90 transition-opacity">
+              أضف إلى عربة الشراء
+            </button>
+          } @else {
+            <div class="w-full max-w-xs text-center px-8 py-4 rounded-lg text-white font-semibold text-lg bg-gray-500">
+              غير متوفر حالياً
+            </div>
+          }
+          
+          <div class="mt-8 border-t pt-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">وصف الكتاب:</h3>
+            <p class="text-gray-800 leading-relaxed">{{ b.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Related Books -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">قد يعجبك أيضاً:</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (relatedBook of relatedBooks(); track relatedBook.id) {
+          <app-book-card [book]="relatedBook"></app-book-card>
+        }
+      </div>
+    </div>
+  } @else {
+    <p class="text-center text-gray-500 py-12">جاري تحميل تفاصيل الكتاب...</p>
+  }
+</div>

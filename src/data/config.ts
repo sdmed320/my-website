@@ -1,0 +1,5 @@
+
+export const config = {
+  deliveryCost: 100,
+  whatsappNumber: "221774423572"
+};

@@ -1,0 +1,86 @@
+<div class="container mx-auto p-4 md:p-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">عربة التسوق</h1>
+
+  @if (cartService.cartItems().length > 0) {
+    <div class="bg-white rounded-lg shadow-lg p-4 md:p-6">
+      <!-- Grid Header -->
+      <div class="hidden sm:grid grid-cols-12 gap-4 font-bold text-gray-600 border-b pb-4 mb-4">
+        <div class="col-span-6">الكتاب</div>
+        <div class="col-span-2 text-center">السعر</div>
+        <div class="col-span-2 text-center">الكمية</div>
+        <div class="col-span-2 text-center">المجموع</div>
+      </div>
+
+      <!-- Cart Items -->
+      <div class="divide-y divide-gray-200">
+        @for(item of cartService.cartItems(); track item.book.id) {
+          <div class="grid grid-cols-12 gap-x-4 gap-y-2 items-center py-4">
+            <!-- Book Details -->
+            <div class="col-span-12 sm:col-span-6 flex items-center gap-4">
+              <img [src]="item.book.coverImage" [alt]="item.book.title" class="w-16 h-24 object-cover rounded-md flex-shrink-0">
+              <div class="flex-grow">
+                <h3 class="font-bold text-lg text-gray-800">{{ item.book.title }}</h3>
+                <p class="text-sm text-gray-500">{{ item.book.author }}</p>
+                <!-- Price for mobile -->
+                <p class="sm:hidden text-gray-700 font-semibold mt-1">{{ item.book.currentPrice }} أوقية</p>
+              </div>
+            </div>
+            
+            <!-- Price (visible on larger screens) -->
+            <div class="hidden sm:block sm:col-span-2 text-center text-gray-700 font-semibold">
+              {{ item.book.currentPrice }} أوقية
+            </div>
+
+            <!-- Quantity -->
+            <div class="col-span-6 sm:col-span-2 flex justify-start sm:justify-center items-center">
+              <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                <button (click)="updateQuantity(item.book.id, item.quantity + 1)" class="px-3 py-1 text-lg font-bold text-gray-700 hover:bg-gray-100 focus:outline-none">+</button>
+                <span class="px-4 py-1 text-center w-12 bg-gray-50 text-gray-900 font-semibold border-x border-gray-300">{{ item.quantity }}</span>
+                <button (click)="updateQuantity(item.book.id, item.quantity - 1)" class="px-3 py-1 text-lg font-bold text-gray-700 hover:bg-gray-100 focus:outline-none">-</button>
+              </div>
+            </div>
+
+            <!-- Total -->
+            <div class="col-span-6 sm:col-span-2 text-end sm:text-center font-bold text-gray-800 text-lg">
+              <span class="sm:hidden text-sm font-semibold text-gray-600">المجموع: </span>
+              {{ item.book.currentPrice * item.quantity }} أوقية
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="mt-8">
+        <div class="max-w-md ml-auto bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h2 class="text-xl font-bold mb-6 text-center text-gray-800">ملخص الطلب</h2>
+            <div class="space-y-4 text-gray-700">
+            <div class="flex justify-between items-center">
+                <span class="font-semibold">مجموع المنتجات</span>
+                <span class="font-medium">{{ cartService.subtotal() }} أوقية</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold">تكلفة التوصيل</span>
+                <span class="font-medium">{{ cartService.deliveryCost() }} أوقية</span>
+            </div>
+            <hr class="my-4">
+            <div class="flex justify-between items-center text-2xl font-bold text-gray-900">
+                <span>المبلغ الإجمالي</span>
+                <span class="text-green-600">{{ cartService.total() }} أوقية</span>
+            </div>
+            </div>
+            <a routerLink="/checkout" class="block w-full text-center mt-8 px-6 py-3 rounded-lg text-white font-semibold main-btn hover:opacity-90 transition-opacity">
+            الانتقال إلى الدفع
+            </a>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="text-center bg-white rounded-lg shadow-lg p-12">
+      <h2 class="text-2xl font-bold text-gray-800">عربة التسوق فارغة</h2>
+      <p class="text-gray-500 mt-2 mb-6">لم تقم بإضافة أي كتب إلى العربة بعد.</p>
+      <a routerLink="/" class="inline-block px-8 py-3 rounded-lg text-white font-semibold main-btn hover:opacity-90 transition-opacity">
+        تصفح الكتب
+      </a>
+    </div>
+  }
+</div>

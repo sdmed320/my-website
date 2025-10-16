@@ -1,0 +1,47 @@
+<a [routerLink]="['/book', book().id]" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+  <div class="relative">
+    <!-- Image -->
+    <img [src]="book().coverImage" [alt]="book().title" class="w-full h-64 object-cover">
+    
+    <!-- Discount Badge -->
+    @if (book().originalPrice && book().originalPrice! > book().currentPrice) {
+      <div class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">تخفيض</div>
+    }
+
+    <!-- Not Available Badge -->
+    @if (!book().isAvailable) {
+       <div class="absolute top-3 left-3 bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded-md">غير متوفر</div>
+    }
+
+    <!-- Add to Cart button (hover effect) -->
+     @if(book().isAvailable) {
+        <button (click)="addToCart($event)" class="absolute bottom-0 left-0 right-0 bg-green-600 text-white w-full py-2 text-center font-semibold opacity-0 group-hover:opacity-100 transform translate-y-full group-hover:translate-y-0 transition-all duration-300">
+            أضف إلى العربة
+        </button>
+     }
+  </div>
+
+  <div class="p-4">
+    <!-- Category -->
+    <p class="text-sm text-gray-500 mb-1">{{ book().category }}</p>
+    <!-- Title -->
+    <h3 class="text-lg font-bold text-gray-800 truncate">{{ book().title }}</h3>
+    <!-- Author -->
+    <p class="text-sm text-gray-600 mb-2">{{ book().author }}</p>
+    <!-- Price -->
+    <div class="flex items-baseline gap-2 mt-2">
+      @if (book().originalPrice && book().originalPrice! > book().currentPrice) {
+        <p class="text-red-500 text-xl font-bold">{{ book().currentPrice }}</p>
+        <p class="text-gray-400 text-sm font-medium line-through">{{ book().originalPrice }}</p>
+      } @else {
+        <p class="text-red-500 text-xl font-bold">{{ book().currentPrice }}</p>
+      }
+      <span class="text-gray-600 text-sm font-medium">أوقية جديدة</span>
+    </div>
+     @if (!book().isAvailable) {
+        <div class="mt-2 text-center text-gray-500 font-semibold border-t pt-2">
+            غير متوفر حالياً
+        </div>
+     }
+  </div>
+</a>
